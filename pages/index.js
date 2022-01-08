@@ -33,7 +33,6 @@ export default function Home ({ posts }) {
           </div>
         </article>
           {posts.map((post,index) =>{
-              console.log(post)
               return(
                 <article className="resume-item" key={index}>
                   <h1 className="title"> <i className="iconfont resumebug"></i> {post.meta.title}</h1>
@@ -55,6 +54,14 @@ export async function getStaticProps () {
   const postsDirectory = path.isAbsolute(postsDir) ? postsDir : path.resolve(process.cwd(), postsDir)
   const posts = fs.readdirSync(postsDirectory).filter(name => {
     return /\.md$/.test(path.extname(name))
+  }).sort((star,next)=>{
+    // 按type的指定顺序排序
+    var order = [
+      "2022-01-08-about-me.md", 
+      "2022-01-08-technology.md",
+       "2022-01-08-project.md"
+      ];
+    return order.indexOf(star) - order.indexOf(next)
   }).map(name => {
     const post = fs.readFileSync(`${postsDirectory}/${name}`, 'utf8')
     const matter = frontMatter(post);
