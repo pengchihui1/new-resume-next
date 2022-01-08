@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { getAllPosts, getPost } from '../../lib/utils'
+import { getAllPosts, getPost } from '../lib/utils'
 import ReactMarkdown from 'react-markdown'
 
 export default function post ({ post = {} }) {
